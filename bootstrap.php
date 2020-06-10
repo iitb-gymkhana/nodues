@@ -12,6 +12,8 @@ require_once "models/section.php";
 require_once "models/admin.php";
 require_once "models/payment.php";
 
+session_start();
+
 if ($isDevMode) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -38,8 +40,7 @@ $twig = new \Twig\Environment($loader, [
 $url = "http" . (($_SERVER['SERVER_PORT'] == 443) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 // User roll number
-$USER_ROLL = '160010005';
-$USER_ROLL = 'root';
+$USER_ROLL = isset($_SESSION['rno']) ? $_SESSION['rno'] : null;
 
 // Twig globals
 $twig->addGlobal('baseUrl', $BASE_URL);

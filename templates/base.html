@@ -40,7 +40,10 @@
                     {% endif %}
 
                     &copy; Copyright {{ year }} &bull; <a href="http://iitb.ac.in" target="_blank">IIT Bombay</a>
-                    &bull; <a href="admin">Admin</a>
+
+                    {% if userRoll %}
+                    &bull; <a href="logout">Logout</a>
+                    {% endif %}
                 </div>
             </div>
         </footer>

@@ -2,7 +2,7 @@
 
 // Check if roll number is set
 if (!isset($USER_ROLL)) {
-    echo 'Not logged in';
+    header('location:login');
     exit;
 }
 
