@@ -13,10 +13,12 @@
 
                 <div class="is-size-5" style="margin: 20px 0">
                 {% for due in dues %}
+                    {% if due.getAmount() > 0 %}
                     <b>{{ due.getSection().getDisplayName() }}:
                         <span class="has-text-danger">INR {{ due.getAmount() }} </span>
                     </b>
                     <br/>
+                    {% endif %}
                 {% endfor %}
                 </div>
 
@@ -43,6 +45,16 @@
                         {% if payment.getTransactionId() %}
                             ({{ payment.getTransactionId() }})
                         {% endif %}
+
+                        {% if is_admin %}
+                            <form method="POST" action="admin" style="display: inline">
+                                <input name="id" hidden value="{{ payment.getId() }}" />
+                                <input name="next" hidden value="{{ url }}" />
+                                <input name="action" hidden value="unpay" />
+                                <button class="button is-small is-danger">x</button>
+                            </form>
+                        {% endif %}
+
                         <br/>
                     {% endfor %}
                 </div>

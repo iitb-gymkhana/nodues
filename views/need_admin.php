@@ -16,3 +16,13 @@ $admins = $entityManager->createQueryBuilder()
         ->getResult();
 
 $IS_ADMIN = count($admins) > 0;
+
+function assertSectionAdmin($admins, $section) {
+    $has_admin = false;
+    foreach ($admins as $admin) {
+        if ($admin->getSection() === $section) $has_admin = true;
+    }
+    if (!$has_admin) {
+        echo 'Not an admin for this section'; exit;
+    }
+}
