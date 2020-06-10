@@ -2,32 +2,35 @@
 
 {% block content %}
 
-{% if total > 0 %}
-
 <section class="section">
     <div class="container">
         <div class="columns is-centered">
             <div class="column is-half">
+                {% if total > 0 %}
                 <div class="is-size-3">
-                    You have pending dues
+                    Pending dues for {{ roll }} <br/>
                 </div>
 
                 <div class="is-size-5" style="margin: 20px 0">
                 {% for due in dues %}
-                    <b>{{ due.getSection().getDisplayName() }}: INR {{ due.getAmount() }}</b><br/>
+                    <b>{{ due.getSection().getDisplayName() }}:
+                        <span class="has-text-danger">INR {{ due.getAmount() }} </span>
+                    </b>
+                    <br/>
                 {% endfor %}
                 </div>
 
                 <div class="is-size-4">
-                    Total to be paid: <span class="has-text-danger"> INR {{ total }} </span>
+                    Total to be paid: INR {{ total }}
                 </div>
+                {% else %}
+                <div class="is-size-3">
+                    No pending dues for {{ roll }}
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
-
-{% else %}
-HAA
-{% endif %}
 
 {% endblock %}

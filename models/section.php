@@ -31,9 +31,21 @@ class Section
      */
     protected $dues;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Admin", mappedBy="section")
+     */
+    protected $admins;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="section")
+     */
+    protected $payments;
+
     public function __construct()
     {
         $this->dues = new ArrayCollection();
+        $this->admins = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -82,5 +94,29 @@ class Section
         $this->displayName = $displayName;
 
         return $this;
+    }
+
+    /**
+     * Get the value of dues
+     */
+    public function getDues()
+    {
+        return $this->dues;
+    }
+
+    /**
+     * Get the value of admins
+     */
+    public function getAdmins()
+    {
+        return $this->admins;
+    }
+
+    /**
+     * Get the value of payments
+     */
+    public function getPayments()
+    {
+        return $this->payments;
     }
 }

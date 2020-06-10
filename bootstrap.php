@@ -9,6 +9,8 @@ require_once "config.php";
 // Register models
 require_once "models/due.php";
 require_once "models/section.php";
+require_once "models/admin.php";
+require_once "models/payment.php";
 
 if ($isDevMode) {
     ini_set('display_errors', 1);
@@ -34,6 +36,7 @@ $twig = new \Twig\Environment($loader, [
 
 // User roll number
 $USER_ROLL = '160010005';
+$USER_ROLL = 'root';
 
 // Twig globals
 $twig->addGlobal('baseUrl', $BASE_URL);
