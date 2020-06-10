@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 
 $provider = new \League\OAuth2\Client\Provider\GenericProvider([
     'clientId'                => 'HBLuN3KpcM1g2GrZwwM3phQJkldJe64ZCJm9781Q',
-    'clientSecret'            => '',
+    'clientSecret'            => 'XHU0fTbjBFC6TjCd4JTZpY2n8fzMdC0uuVhGIBffHTQLRNltKwIaeSaPgDEHiWVaBoC0jSulerfRITcVhyiQ0v40XvbGQpd7lPgpmyIuCylJJ1XJnWtX5grM2jNNIQ4I',
     'redirectUri'             => 'https://gymkhana.iitb.ac.in/~mlc/nodues/login',
     'urlAuthorize'            => 'https://gymkhana.iitb.ac.in/sso/oauth/authorize/',
     'urlAccessToken'          => 'https://gymkhana.iitb.ac.in/sso/oauth/token/',

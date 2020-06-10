@@ -4,7 +4,7 @@
 $conn = array(
     'dbname' => 'nodues',
     'user' => 'nodues',
-    'password' => 'OiE8pr7vcU4NCq7u',
+    'password' => 'vHn1HMywS2bz7GtD',
     'host' => 'mysql',
     'driver' => 'pdo_mysql',
 );
