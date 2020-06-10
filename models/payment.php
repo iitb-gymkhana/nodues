@@ -47,6 +47,11 @@ class Payment
      */
     protected $updatedOn;
 
+    /**
+     * @ORM\Column(type="float", options={"default" : 0})
+     */
+    protected $amount;
+
     public function __construct()
     {}
 
@@ -174,6 +179,26 @@ class Payment
     public function setUpdatedOn($updatedOn)
     {
         $this->updatedOn = $updatedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of amount
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set the value of amount
+     *
+     * @return  self
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
 
         return $this;
     }

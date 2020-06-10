@@ -24,6 +24,25 @@ $dues = $entityManager->createQueryBuilder()
         ->getQuery()
         ->getResult();
 
+// Get payments objects
+$payments = $entityManager->createQueryBuilder()
+        ->select('p')
+        ->from('Payment', 'p')
+        ->where('p.rollNo = :rollNo')
+        ->setParameter('rollNo', $ROLL)
+        ->getQuery()
+        ->getResult();
+
+// Process dues to subtract payments
+foreach ($payments as $payment) {
+    foreach ($dues as $due) {
+        if ($payment->getSection() === $due->getSection()) {
+            $due->setAmount($due->getAmount() - $payment->getAmount());
+            break;
+        }
+    }
+}
+
 // Get total dues
 $total = 0;
 foreach ($dues as $due) {
@@ -35,5 +54,7 @@ echo $twig->render('home.html', [
     'dues' => $dues,
     'total' => $total,
     'is_admin' => $IS_ADMIN,
+    'admins' => $admins,
+    'payments' => $payments,
 ]);
 

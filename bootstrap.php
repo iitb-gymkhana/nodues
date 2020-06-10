@@ -34,6 +34,9 @@ $twig = new \Twig\Environment($loader, [
     'cache' => ($isDevMode === true ? false : __DIR__.'/.cache_twig'),
 ]);
 
+// Current URL
+$url = "http" . (($_SERVER['SERVER_PORT'] == 443) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
 // User roll number
 $USER_ROLL = '160010005';
 $USER_ROLL = 'root';
@@ -42,6 +45,7 @@ $USER_ROLL = 'root';
 $twig->addGlobal('baseUrl', $BASE_URL);
 $twig->addGlobal('userRoll', $USER_ROLL);
 $twig->addGlobal('year', date("Y"));
+$twig->addGlobal('url', $url);
 
 // Stop cache
 header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');

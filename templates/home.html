@@ -8,7 +8,7 @@
             <div class="column is-half">
                 {% if total > 0 %}
                 <div class="is-size-3">
-                    Pending dues for {{ roll }} <br/>
+                    Pending dues for {{ roll }}
                 </div>
 
                 <div class="is-size-5" style="margin: 20px 0">
@@ -27,6 +27,75 @@
                 <div class="is-size-3">
                     No pending dues for {{ roll }}
                 </div>
+                {% endif %}
+
+                {% if payments|length > 0 %}
+                <br/>
+                <div class="is-size-3">
+                    Payments Registered
+                </div>
+
+                <div class="is-size-5" style="margin-top: 10px">
+                    {% for payment in payments %}
+                        <b>{{ payment.getSection().getDisplayName() }}:
+                            <span class="has-text-success">INR {{ payment.getAmount() }} </span>
+                        </b>
+                        {% if payment.getTransactionId() %}
+                            ({{ payment.getTransactionId() }})
+                        {% endif %}
+                        <br/>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if is_admin %}
+                <br/>
+                <div class="is-size-3">
+                    Admin Interface
+                </div>
+
+                <div class="is-size-4">
+                    Register Payment
+                </div>
+
+                <form method="POST" action="admin" style="margin-top: 10px;">
+                    <div class="field">
+                        <div class="control">
+                          <div class="select is-primary">
+                            <select name="section_id">
+                                {% for admin in admins %}
+                                <option value="{{ admin.getSection().getId() }}" >
+                                    {{ admin.getSection().getDisplayName() }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input name="amount" class="input" type="text" placeholder="Amount">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input name="tid" class="input" type="text" placeholder="Transaction ID (optional)">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input name="comments" class="input" type="text" placeholder="Comments (optional, not shown to student)">
+                        </div>
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary">Register</button>
+                    </div>
+
+                    <input name="action" hidden value="pay" />
+                    <input name="roll" hidden value="{{ roll }}" />
+                    <input name="next" hidden value="{{ url }}" />
+                </form>
+
                 {% endif %}
             </div>
         </div>
