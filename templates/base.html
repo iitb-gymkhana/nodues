@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title> No Dues Interface </title>
+        <base href="{{ baseUrl }}" />
+
+        <link rel="stylesheet" href="css/bulma.min.css">
+
+        <meta charset="UTF-8">
+        <meta name="description" content="No dues interface for IIT Bombay">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Varun Patil">
+
+        {% block head %} {% endblock %}
+    </head>
+    <body>
+
+        <section id="top" class="hero is-success has-text-left">
+            <div class="hero-body">
+                <div class="container">
+                <h1 class="title">
+                    <a href="" style="color: white">No Dues Interface</a>
+                </h1>
+                <h2 class="subtitle">
+                    IIT Bombay
+                </h2>
+                </div>
+            </div>
+        </section>
+
+        <div id="content">{% block content %}{% endblock %}</div>
+
+        <footer class="footer no-print">
+            <div class="content has-text-centered">
+                <div>
+                    {% if userRoll %}
+                    <div class="subtitle is-6">
+                        Logged in as {{ userRoll }}
+                    </div>
+                    {% endif %}
+
+                    &copy; Copyright {{ year }} &bull; <a href="http://iitb.ac.in" target="_blank">IIT Bombay</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

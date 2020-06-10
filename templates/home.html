@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if total > 0 %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <div class="is-size-3">
+                    You have pending dues
+                </div>
+
+                <div class="is-size-5" style="margin: 20px 0">
+                {% for due in dues %}
+                    <b>{{ due.getSection().getDisplayName() }}: INR {{ due.getAmount() }}</b><br/>
+                {% endfor %}
+                </div>
+
+                <div class="is-size-4">
+                    Total to be paid: <span class="has-text-danger"> INR {{ total }} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+HAA
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,5 @@
+vendor
+db.sqlite
+phpliteadmin*
+.cache
+.cache_twig
