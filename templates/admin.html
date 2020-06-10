@@ -22,6 +22,33 @@
                             </div>
                         </div>
                     </form>
+
+                    <form method="POST" action="admin" style="margin-top: 10px;">
+                        Download Section Payment Data
+                        <div class="field has-addons">
+                            <div class="control">
+                              <div class="select is-primary">
+                                <select name="section_id">
+                                    {% for admin in admins %}
+                                    <option value="{{ admin.getSection().getId() }}" >
+                                        {{ admin.getSection().getDisplayName() }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="control">
+                                <button class="button is-primary">Go</button>
+                            </div>
+                        </div>
+
+                        <input name="action" hidden value="section_data" />
+                    </form>
+
+                    <form method="POST" action="admin" style="margin-top: 10px;">
+                        <input class="button is-primary" type="submit" value="Download Master Sheet" />
+                        <input name="action" hidden value="master" />
+                    </form>
                 </div>
             </div>
         </div>
