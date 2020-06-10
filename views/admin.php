@@ -50,14 +50,19 @@ if (isset($_POST['action'])) {
 
         // Construct data
         $data = array(array(
-            'Roll No', 'Amount', 'Transaction ID', 'Comments'
+            'Roll No', 'Amount', 'Transaction ID', 'Comments', 'Updated By', 'Updated On',
         ));
         foreach ($payments as $payment) {
+            $date = $payment->getUpdatedOn();
+            $date->setTimezone(new DateTimeZone('Asia/Kolkata'));
+
             $point = array(
                 $payment->getRollNo(),
                 $payment->getAmount(),
                 $payment->getTransactionId(),
                 $payment->getComments(),
+                $payment->getUpdatedBy(),
+                $date->format(DATE_RFC2822),
             );
             array_push($data, $point);
         }
