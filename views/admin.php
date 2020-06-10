@@ -127,10 +127,16 @@ if (isset($_POST['action'])) {
             }
         }
 
+        // Get CN of user
+        $ds = null;
+        if ($LDAP_SERVER !== null) {
+            $ds = ldap_connect($LDAP_SERVER) or die("Unable to connect to LDAP server. Please try again later.");
+        }
+
         // Compile the results
         $result = array();
         $header = array(
-            'Roll No', 'Total Due',
+            'Roll No', 'Name', 'Total Due',
         );
         foreach ($snames as $sn) {
             array_push($header, $sn);
@@ -139,14 +145,23 @@ if (isset($_POST['action'])) {
 
         // Compute table
         foreach ($dues as $r => $due) {
+            $cn = '';
+            if ($LDAP_SERVER !== null) {
+                $sr = ldap_search($ds, "dc=iitb,dc=ac,dc=in", "(employeeNumber=$r)", array("cn"));
+                $entries = ldap_get_entries($ds, $sr);
+                if ($entries['count'] > 0) {
+                    $cn = $entries[0]["cn"][0];
+                }
+            }
+
             $point = array(
-                $r, 0,
+                $r, $cn, 0,
             );
 
             foreach ($snames as $sn) {
                 $am = isset($due[$sn]) ? $due[$sn] : 0;
                 array_push($point, $am);
-                $point[1] += $am;
+                $point[2] += $am;
             }
 
             array_push($result, $point);

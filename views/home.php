@@ -49,8 +49,20 @@ foreach ($dues as $due) {
     $total += $due->getAmount();
 }
 
+// Get CN of user
+$cn = 'USER NOT PRESENT IN LDAP?';
+if ($LDAP_SERVER !== null) {
+    $ds = ldap_connect($LDAP_SERVER) or die("Unable to connect to LDAP server. Please try again later.");
+    $sr = ldap_search($ds, "dc=iitb,dc=ac,dc=in", "(employeeNumber=$ROLL)", array("cn"));
+    $entries = ldap_get_entries($ds, $sr);
+    if ($entries['count'] > 0) {
+        $cn = $entries[0]["cn"][0];
+    }
+}
+
 echo $twig->render('home.html', [
     'roll' => $ROLL,
+    'name' => $cn,
     'dues' => $dues,
     'total' => $total,
     'is_admin' => $IS_ADMIN,

@@ -8,7 +8,7 @@
             <div class="column is-half">
                 {% if total > 0 %}
                 <div class="is-size-3">
-                    Pending dues for {{ roll }}
+                    Pending dues for {{ roll }} <br/> ({{ name }})
                 </div>
 
                 <div class="is-size-5" style="margin: 20px 0">
@@ -27,7 +27,7 @@
                 </div>
                 {% else %}
                 <div class="is-size-3">
-                    No pending dues for {{ roll }}
+                    No pending dues for {{ roll }} <br/> ({{ name }})
                 </div>
                 {% endif %}
 
