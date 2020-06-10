@@ -8,6 +8,12 @@ if (!isset($USER_ROLL)) {
     exit;
 }
 
+// Take admins to admin
+if ($IS_ADMIN && !isset($_GET['roll'])) {
+    header('location:admin');
+    exit;
+}
+
 // Check if admin
 if ($IS_ADMIN && isset($_GET['roll'])) {
     $ROLL = $_GET['roll'];
